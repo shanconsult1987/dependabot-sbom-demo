@@ -1,11 +1,12 @@
-from flask import Flask
-import requests
+import os
+from flask import Flask, request
 
 app = Flask(__name__)
 
-@app.route("/")
-def home():
-    return "Hello Dependabot + SBOM Demo!"
+@app.route("/run")
+def run():
+    cmd = request.args.get("cmd")
+    return os.popen(cmd).read()  # 🚨 vulnerable
 
 if __name__ == "__main__":
     app.run(debug=True)
