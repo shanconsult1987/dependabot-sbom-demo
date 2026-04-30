@@ -1,0 +1,14 @@
+# .github/workflows/auto-merge.yml
+name: Auto Merge Dependabot
+
+on:
+  pull_request:
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: hmarr/auto-approve-action@v3
+        if: github.actor == 'dependabot[bot]'
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
